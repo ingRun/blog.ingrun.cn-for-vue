@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-      <p> 创建blog 的 vue 在 GitHub 上的项目  并同步  </p>
+      <p name="1"> 创建blog 的 vue 在 GitHub 上的项目  并同步  </p>
       <p> 创建脚本 完成 blog 后端 项目的同步发布 </p>
       <p> 创建脚本 完成 blog 前 后端 的发布脚本 </p>
   </div>
