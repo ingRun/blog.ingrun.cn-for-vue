@@ -2,26 +2,13 @@
   <div id="aside">
     <div class="con">
       <el-row>
-        <el-col>
-          <el-menu
-            default-active="1"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-          >
-            <div v-for="(item, index) in cla " :key="index">
-              <el-submenu :index="index">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>{{item}}</span>
-                </template>
-                  <el-menu-item index="1-1">选项1</el-menu-item>
-                  <el-menu-item index="1-2">选项2</el-menu-item>
-                  <el-menu-item index="1-3">选项3</el-menu-item>
-                <el-menu-item index="1-3">选项4</el-menu-item>
-              </el-submenu>
-            </div>
-          </el-menu>
+        <el-col             v-for="(item, index) in data"
+            :key="index">
+          <el-link
+            type="primary"
+
+            @click="queryContents(item.id)"
+          >{{ item.blog_title }}</el-link>
         </el-col>
       </el-row>
     </div>
@@ -33,25 +20,33 @@ export default {
   name: "aside",
   data() {
     return {
-      cla: ["python", "java", "vue", "html/css", "other"]
+      cla: ["python", "java", "vue", "html/css", "other"],
+      data: ""
     };
   },
   props: {
     msg: String
   },
+  mounted() {
+    this.queryList();
+  },
   methods: {
-    handleOpen(key, keyPath) {
-      this.$notify({
-        title: "标题名称",
-        message: key + " " + keyPath
-      });
+    queryList() {
+      this.$axios({
+        method: "get",
+        url: "api/getBlogList"
+      })
+        .then(response => {
+          this.data = response.data;
+        })
+        .catch(err => {
+          this.isLoading = false;
+          this.$toast.fail(err + "");
+        });
     },
-    handleClose(key, keyPath) {
-      //   console.log(key, keyPath);
-      this.$notify({
-        title: "标题名称",
-        message: key + " " + keyPath
-      });
+
+    queryContents(id) {
+      this.$store.dispatch("getBlogContents", id);
     }
   }
 };
@@ -67,16 +62,13 @@ export default {
   margin-left: 7%;
   margin-top: 22px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  text-align: left;
+  // text-align: left;
 
-.el-menu{
+  .el-menu {
     border-right: none;
+  }
 }
-
-}
-
 </style>
 
 <style>
-
 </style>
