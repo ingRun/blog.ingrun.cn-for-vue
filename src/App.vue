@@ -2,9 +2,10 @@
   <div id="app">
     <div id="nav">
       <ti></ti>
-      <router-link to='/'></router-link>
     </div>
-    <router-view/>
+    <div class="con"> 
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -19,6 +20,20 @@ export default {
 };
 </script>
 
+<style lang='scss' scoped>
+.con {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 15px;
+  min-height: 450px;
+  margin-top: 22px;
+  padding-bottom: 42px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  background-color: rgb(251, 251, 251);
+}
+</style>
+
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -26,7 +41,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(238, 238, 238)
+  background-color: rgb(139, 139, 139);
+
+  padding-left: 2%;
+  padding-right: 2%;
+
 }
 
 #nav {
@@ -44,5 +63,6 @@ export default {
 
 body{
   margin: 0;
+
 }
 </style>

@@ -2,13 +2,10 @@
   <div id="aside">
     <div class="con">
       <el-row>
-        <el-col             v-for="(item, index) in data"
-            :key="index">
-          <el-link
-            type="primary"
-
-            @click="queryContents(item.id)"
-          >{{ item.blog_title }}</el-link>
+        <el-col v-for="(item, index) in data" :key="index">
+          <el-link type="danger" @click="queryContents(item.id)">
+            {{ item.blog_title }}
+          </el-link>
         </el-col>
       </el-row>
     </div>
@@ -63,6 +60,7 @@ export default {
   margin-top: 22px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   // text-align: left;
+  background-color: rgb(251, 251, 251);
 
   .el-menu {
     border-right: none;

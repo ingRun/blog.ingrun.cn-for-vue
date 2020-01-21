@@ -32,7 +32,7 @@ export default {
   border: 1px solid #ccc;
   border-radius: 12px;
   height: 150px;
-  width: 96%;
+  width: 100%;
   margin: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   background-color: rgb(251, 251, 251)
