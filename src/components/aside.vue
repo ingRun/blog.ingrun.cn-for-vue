@@ -2,10 +2,22 @@
   <div id="aside">
     <div class="con">
       <el-row>
-        <el-col v-for="(item, index) in data" :key="index">
-          <el-link type="danger" @click="queryContents(item.id)">
-            {{ item.blog_title }}
-          </el-link>
+        <el-col :span="24">
+          <div class="_blog" v-for="(item, index) in blog_list" :key="index">
+              <el-link type="primary" @click="queryContents(item.id)">
+                {{item.blog_title}}
+              </el-link>
+              <el-row>
+                <el-col :span='3'>
+              <i class="el-icon-star-on"> <span> 喜欢：{{item.like_count}}</span>  </i>
+
+                </el-col>
+                <el-col :span='3'>
+              <i class="el-icon-view"> <span> 阅读：{{item.read_count}} </span></i>
+
+                </el-col>             
+                 </el-row>
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -17,8 +29,7 @@ export default {
   name: "aside",
   data() {
     return {
-      cla: ["python", "java", "vue", "html/css", "other"],
-      data: ""
+      blog_list: ""
     };
   },
   props: {
@@ -34,7 +45,11 @@ export default {
         url: "api/getBlogList"
       })
         .then(response => {
-          this.data = response.data;
+          if (response.data.code == 1) {
+            this.blog_list = response.data.data;
+          } else {
+            this.$toast.fail(response.data.message + "");
+          }
         })
         .catch(err => {
           this.isLoading = false;
@@ -43,30 +58,62 @@ export default {
     },
 
     queryContents(id) {
-      this.$store.dispatch("getBlogContents", id);
+      this.$store.commit("set_current_blig_id", id);
+      this.$router.push("/show");
     }
   }
 };
 </script>
 
 <style lang='scss' scoped>
+#aside {
+  margin-top: 40px;
+}
+
+._blog {
+  height: 85px;
+  border: 1px dashed rgb(223, 223, 223);
+  border-radius: 6px;
+  margin: 12px;
+  padding: 0 12px;
+  // display: table;
+
+  .el-icon-star-on{
+    color: #409EFF;
+  }
+  span{
+    font-size: 14px;
+    display:inline-block; 
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  i{
+    font-size: 20px;
+  }
+}
+
 .con {
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   border-radius: 12px;
-  width: 60%;
   padding: 15px;
   min-height: 450px;
-  margin-left: 7%;
-  margin-top: 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   // text-align: left;
-  background-color: rgb(251, 251, 251);
+  // background-color: rgb(251, 251, 251);
+  text-align: left;
 
   .el-menu {
     border-right: none;
   }
-}
-</style>
 
-<style>
+  .el-link {
+    margin-top: 15px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 </style>

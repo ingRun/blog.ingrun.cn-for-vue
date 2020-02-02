@@ -6,15 +6,21 @@
     <div class="con"> 
       <router-view/>
     </div>
+
+    <drawer />
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import ti from "@/components/title.vue";
+import drawer from "@/components/drawer.vue";
+
 export default {
   components: {
     ti,
+    drawer,
   }
   
 };
@@ -27,9 +33,10 @@ export default {
   padding: 15px;
   min-height: 450px;
   margin-top: 22px;
-  padding-bottom: 42px;
+  // padding-bottom: 42px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   background-color: rgb(251, 251, 251);
+  // margin-bottom: 22px;
 }
 </style>
 
@@ -46,16 +53,18 @@ export default {
   padding-left: 2%;
   padding-right: 2%;
 
+  padding-bottom: 2%;
+
 }
 
 #nav {
   padding-top: 22px;
 }
 
-#nav a {
+/* #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
+} */
 
 #nav a.router-link-exact-active {
   color: #42b983;

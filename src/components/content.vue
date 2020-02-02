@@ -1,16 +1,18 @@
 <template>
   <div id="content">
     <div class="con">
-      <div class>
-        <mavon-editor
-          :value='this.$store.state.blog_contents'
-          :subfield="false"
-          defaultOpen="preview"
-          :editable="false"
-          :toolbarsFlag="false"
-          fontSize= "16px"
-        ></mavon-editor>
-      </div>
+      <el-row>
+        <el-col :span="24">
+          <mavon-editor
+            :value="contents"
+            :subfield="false"
+            defaultOpen="preview"
+            :editable="false"
+            :toolbarsFlag="false"
+            fontSize="12px"
+          ></mavon-editor>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -19,14 +21,19 @@
 export default {
   data() {
     return {
-      context: "" //输入的数据
+      blog_id: 1
     };
   },
-  methods: {
-    
-    getBlogContents() {
-        this.$store.dispatch('getBlogContents', 1)
+  props: ['contents'],
 
+  mounted() {
+    if (this.$store.state.current_blog_id != "") {
+      this.blog_id = this.$store.state.current_blog_id;
+    }
+  },
+  methods: {
+    getBlogContents() {
+      this.$store.dispatch("getBlogContents", 1);
     }
   }
 };
@@ -36,9 +43,14 @@ export default {
 .con {
   // border: 1px solid #ccc;
   // border-radius: 12px;
-  width: 97%;
+  width: 100%;
   margin-top: 22px;
   // padding: 5px;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.icon{
+  font-size: 13px;
+  padding-bottom: 8px;
 }
 </style>
