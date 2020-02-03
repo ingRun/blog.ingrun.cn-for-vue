@@ -48,11 +48,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(139, 139, 139);
+  background-color: rgb(197, 193, 193);
 
   padding-left: 2%;
   padding-right: 2%;
-
   padding-bottom: 2%;
 
 }

@@ -6,8 +6,11 @@
           <el-tab-pane label="登陆">
             <el-input placeholder="请输入用户名" v-model="username" clearable></el-input>
             <div style="margin-top: 10px"></div>
-            <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
+            <el-input placeholder="请输入密码" v-model="password" show-password @keyup.enter.native="login"></el-input>
             <div style="margin-top: 10px"></div>
+            <div style="margin-top: 10px" class="login_message">
+              <p>{{login_message}}</p>
+            </div>
             <button class="login_button" @click="login">登陆</button>
           </el-tab-pane>
           <el-tab-pane label="注册">注册</el-tab-pane>
@@ -40,7 +43,7 @@
       </div>
     </el-drawer>
     <div class="ler">
-      <el-button @click="drawer = true" type="primary" >+</el-button>
+      <el-button @click="drawer = true" type="primary">+</el-button>
     </div>
   </div>
 </template>
@@ -52,7 +55,8 @@ export default {
       drawer: false,
       username: "",
       password: "",
-      user: {}
+      user: {},
+      login_message: ""
     };
   },
   mounted() {
@@ -72,12 +76,21 @@ export default {
           "Content-Type": "application/json; charset=utf-8" //这里重点
         },
         data: JSON.stringify(data)
-      }).then(res => {
-        if (res.data.code != 0) {
-          this.$store.commit("set_token", res.data.data.token);
-          this.getUserInfo();
-        }
-      });
+      })
+        .then(res => {
+          if (res.data.code != 0) {
+            this.$store.commit("set_token", res.data.data.token);
+            this.getUserInfo();
+            this.login_message = '';
+          }
+        })
+        .catch( e => {
+          if (e.response.data.code == 0){
+            this.login_message = e.response.data.message;  //设置密码错误提示
+          }else{
+            this.login_message = "连接服务器失败！"
+          }
+        });
 
       this.username = "";
       this.password = "";
@@ -125,7 +138,7 @@ export default {
 <style lang='scss' scoped>
 .ler {
   position: fixed;
-  left:3px;
+  left: 10px;
   top: 47%;
   button {
     background-color: rgb(97, 114, 207);
@@ -164,5 +177,10 @@ export default {
   button {
     width: 100%;
   }
+}
+
+.login_message{
+  font-size: 13px;
+  color:red;
 }
 </style>
