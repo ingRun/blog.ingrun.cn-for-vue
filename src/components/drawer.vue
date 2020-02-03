@@ -1,46 +1,57 @@
 <template>
   <div class="dra">
     <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false" direction="ltr">
-      <div class="login_row" v-if="this.$store.state.token == ''">
-        <el-tabs type="border-card">
-          <el-tab-pane label="登陆">
-            <el-input placeholder="请输入用户名" v-model="username" clearable></el-input>
-            <div style="margin-top: 10px"></div>
-            <el-input placeholder="请输入密码" v-model="password" show-password @keyup.enter.native="login"></el-input>
-            <div style="margin-top: 10px"></div>
-            <div style="margin-top: 10px" class="login_message">
-              <p>{{login_message}}</p>
+      <transition name="el-zoom-in-center" mode="out-in">
+        <div class="login_row" v-if="this.$store.state.token == ''" key='login'>
+          <el-tabs type="border-card">
+            <el-tab-pane label="登陆">
+              <el-input placeholder="请输入用户名" v-model="username" clearable></el-input>
+              <div style="margin-top: 10px"></div>
+              <el-input
+                placeholder="请输入密码"
+                v-model="password"
+                show-password
+                @keyup.enter.native="login"
+              ></el-input>
+              <div style="margin-top: 10px"></div>
+              <div style="margin-top: 10px" class="login_message">
+                <p>{{login_message}}</p>
+              </div>
+              <button class="login_button" @click="login">登陆</button>
+            </el-tab-pane>
+            <el-tab-pane label="注册">
+              <Register />
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+        <div class="else" v-else key='show'>
+          <div class="transition-box">
+            <div class="user">
+              <el-row>
+                <el-col :span="7">
+                  <div>
+                    <p>用户ID：</p>
+                    <p>用户名：</p>
+                    <p>邮箱：</p>
+                    <p>手机号码：</p>
+                  </div>
+                </el-col>
+                <el-col :span="12">
+                  <div class="UserInfo">
+                    <p>{{ user.id }}</p>
+                    <p>{{ user.username }}</p>
+                    <p>{{ user.email }}</p>
+                    <p>{{ user.phone }}</p>
+                  </div>
+                </el-col>
+              </el-row>
             </div>
-            <button class="login_button" @click="login">登陆</button>
-          </el-tab-pane>
-          <el-tab-pane label="注册">注册</el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="else" v-else>
-        <div class="user">
-          <el-row>
-            <el-col :span="8">
-              <div>
-                <p>用户ID：</p>
-                <p>用户名：</p>
-                <p>邮箱：</p>
-                <p>手机号码：</p>
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div>
-                <p>{{ user.id }}</p>
-                <p>{{ user.username }}</p>
-                <p>{{ user.email }}</p>
-                <p>{{ user.phone }}</p>
-              </div>
-            </el-col>
-          </el-row>
+            <div class="logout">
+              <el-button @click="logout">注销</el-button>
+            </div>
+          </div>
         </div>
-        <div class="logout">
-          <el-button @click="logout">注销</el-button>
-        </div>
-      </div>
+      </transition>
     </el-drawer>
     <div class="ler">
       <el-button @click="drawer = true" type="primary">+</el-button>
@@ -49,7 +60,14 @@
 </template>
 
 <script>
+import Register from "@/components/register.vue";
+
+
 export default {
+  components: {
+    Register
+  },
+
   data() {
     return {
       drawer: false,
@@ -81,18 +99,17 @@ export default {
           if (res.data.code != 0) {
             this.$store.commit("set_token", res.data.data.token);
             this.getUserInfo();
-            this.login_message = '';
+            this.login_message = "";
           }
         })
-        .catch( e => {
-          if (e.response.data.code == 0){
-            this.login_message = e.response.data.message;  //设置密码错误提示
-          }else{
-            this.login_message = "连接服务器失败！"
+        .catch(e => {
+          if (e.response.data.code == 0) {
+            this.login_message = e.response.data.message; //设置密码错误提示
+          } else {
+            this.login_message = "连接服务器失败！";
           }
         });
 
-      this.username = "";
       this.password = "";
     },
 
@@ -179,8 +196,14 @@ export default {
   }
 }
 
-.login_message{
+.login_message {
   font-size: 13px;
-  color:red;
+  color: red;
+}
+
+.UserInfo{
+  p{
+    border-bottom: 1px dashed  #ccc;
+  }
 }
 </style>
