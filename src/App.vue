@@ -3,12 +3,19 @@
     <div id="nav">
       <ti></ti>
     </div>
-    <div class="con"> 
-      <router-view/>
+    <div class="con">
+      <router-view />
     </div>
 
     <drawer />
-
+    <div class="foot">
+      <p>
+        <el-link>关于博主</el-link>
+      </p>
+      <p>
+        <el-link>注册用户申请</el-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -20,9 +27,8 @@ import drawer from "@/components/drawer.vue";
 export default {
   components: {
     ti,
-    drawer,
+    drawer
   }
-  
 };
 </script>
 
@@ -38,12 +44,23 @@ export default {
   background-color: rgb(251, 251, 251);
   // margin-bottom: 22px;
 }
+
+.foot {
+  background-color: rgb(251, 251, 251);
+  min-height: 55px;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 15px;
+  span {
+    color: white !important;
+  }
+}
 </style>
 
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -53,7 +70,6 @@ export default {
   padding-left: 2%;
   padding-right: 2%;
   padding-bottom: 2%;
-
 }
 
 #nav {
@@ -69,8 +85,7 @@ export default {
   color: #42b983;
 }
 
-body{
+body {
   margin: 0;
-
 }
 </style>

@@ -2,21 +2,25 @@
   <div id="aside">
     <div class="con">
       <el-row>
-        <el-col :span="24">
+        <el-col :span="22" :offset='1'>
           <div class="_blog" v-for="(item, index) in blog_list" :key="index">
-              <el-link type="primary" @click="queryContents(item.id)">
-                {{item.blog_title}}
-              </el-link>
-              <el-row>
-                <el-col :span='3'>
-              <i class="el-icon-star-on"> <span> 喜欢：{{item.like_count}}</span>  </i>
-
-                </el-col>
-                <el-col :span='3'>
-              <i class="el-icon-view"> <span> 阅读：{{item.read_count}} </span></i>
-
-                </el-col>             
-                 </el-row>
+            <el-row>
+              <el-col :span="18">
+                <el-link target="_blank" @click="queryContents(item.id)">{{item.blog_title}}</el-link>
+              </el-col>
+              <el-col :span="3">
+                <i class="el-icon-star-on">
+                  &emsp;
+                  <span>喜欢：{{item.like_count}}</span>
+                </i>
+              </el-col>
+              <el-col :span="3">
+                <i class="el-icon-view">
+                  &nbsp;
+                  <span>阅读：{{item.read_count}}</span>
+                </i>
+              </el-col>
+            </el-row>
           </div>
         </el-col>
       </el-row>
@@ -26,7 +30,7 @@
 
 <script>
 export default {
-  name: "aside",
+  name: "Myaside",
   data() {
     return {
       blog_list: ""
@@ -71,24 +75,21 @@ export default {
 }
 
 ._blog {
-  height: 85px;
-  border: 1px dashed rgb(223, 223, 223);
-  border-radius: 6px;
+  height: 45px;
+  border-bottom: 1px dashed rgb(201, 193, 193);
+  // border-radius: 6px;
   margin: 12px;
   padding: 0 12px;
   // display: table;
 
-  .el-icon-star-on{
-    color: #409EFF;
-  }
-  span{
+  span {
     font-size: 14px;
-    display:inline-block; 
+    display: inline-block;
     height: 100%;
     vertical-align: middle;
   }
 
-  i{
+  i {
     font-size: 20px;
   }
 }

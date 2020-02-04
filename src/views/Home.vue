@@ -2,22 +2,20 @@
   <div class="home">
     <el-row>
       <el-col :span='24'>
-        <Aside />
+        <MyAside />
       </el-col>
-
     </el-row>
-
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Aside from "@/components/aside.vue";
+import MyAside from "@/components/aside.vue";
 
 export default {
   name: "home",
   components: {
-    Aside
+    MyAside
   },
   data() {
     return {

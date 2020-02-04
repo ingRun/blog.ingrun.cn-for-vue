@@ -13,7 +13,7 @@
     <div style="margin-top: 10px" class="register_message">
       <p>{{register_message}}</p>
     </div>
-    <button class="register_button" disabled>注册</button>
+    <button class="register_button" @click="retister" disabled>注册</button>
   </div>
 </template>
 
@@ -23,13 +23,42 @@ export default {
     return {
       username: "",
       password: "",
-      re_password: '',
-      email: '',
-      phone: '',
+      re_password: "",
+      email: "",
+      phone: "",
       register_message: "当前注册功能禁用！"
     };
   },
-  methods: {}
+  methods: {
+    retister() {
+      var user = {
+        username: this.username,
+        password: this.password,
+        re_password: this.re_password,
+        email: this.email,
+        phone: this.phone
+      };
+      this.$axios({
+        url: "/api/register",
+        method: "post",
+        type: "json",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8" //这里重点
+        },
+        data: JSON.stringify(user)
+      })
+        .then(res => {
+          if (res.data.code == 1) {
+            this.$notify({
+              message: res.data.message
+            });
+          }
+        })
+        .catch(e => {
+          this.register_message = e.response.data.message;
+        });
+    }
+  }
 };
 </script>
 
@@ -40,11 +69,9 @@ export default {
   padding: 8px;
   border-radius: 4px;
   color: white;
-
 }
-.register_message{
-    font-size: 13px;
-    color: red;
+.register_message {
+  font-size: 13px;
+  color: red;
 }
-
 </style>

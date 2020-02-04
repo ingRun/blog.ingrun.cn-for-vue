@@ -142,10 +142,8 @@ export default {
         .then(res => {
           this.user = res.data.data;
         })
-        .catch(e => {
-          if (e.response.data.code == 0) {
+        .catch(() => {
             this.$store.commit("set_token", "");
-          }
         });
     }
   }
