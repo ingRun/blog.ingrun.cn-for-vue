@@ -2,22 +2,28 @@
   <div id="aside">
     <div class="con">
       <el-row>
-        <el-col :span="22" :offset='1'>
+        <el-col :span="22" :offset="1">
           <div class="_blog" v-for="(item, index) in blog_list" :key="index">
             <el-row>
-              <el-col :span="18">
+              <el-col :span="14">
                 <el-link target="_blank" @click="queryContents(item.id)">{{item.blog_title}}</el-link>
               </el-col>
-              <el-col :span="3">
+              <el-col :span="2">
                 <i class="el-icon-star-on">
                   &emsp;
                   <span>喜欢：{{item.like_count}}</span>
                 </i>
               </el-col>
-              <el-col :span="3">
+              <el-col :span="2">
                 <i class="el-icon-view">
                   &nbsp;
                   <span>阅读：{{item.read_count}}</span>
+                </i>
+              </el-col>
+              <el-col :span="6">
+                <i class="el-icon-view">
+                  &nbsp;
+                  <span class="time">最后编辑时间：{{item.update_time}}</span>
                 </i>
               </el-col>
             </el-row>
@@ -81,7 +87,6 @@ export default {
   margin: 12px;
   padding: 0 12px;
   // display: table;
-
   span {
     font-size: 14px;
     display: inline-block;
@@ -90,7 +95,19 @@ export default {
   }
 
   i {
-    font-size: 20px;
+    // font-size: 20px;
+    margin-top: 20px;
+    font-family: "simsun";
+    vertical-align: middle;
+    padding: 0 0.08rem 0.08rem 0;
+    span {
+      display: inline-block;
+      padding-bottom: 2px;
+      font-size: 12px;
+    }
+    .time {
+      font-size: 12px;
+    }
   }
 }
 
@@ -98,6 +115,7 @@ export default {
   // border: 1px solid #ccc;
   border-radius: 12px;
   padding: 15px;
+  padding-bottom: 35px;
   min-height: 450px;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   // text-align: left;

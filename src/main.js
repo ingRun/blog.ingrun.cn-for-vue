@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import './plugins/axios'
+// import './plugins/axios'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -10,13 +10,13 @@ import 'mavon-editor/dist/css/index.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
+import axios from './http'
 Vue.use(ElementUI)
 Vue.use(mavonEditor)  //markdown 编辑
 
 Vue.config.productionTip = false
 
-
+Vue.prototype.$axios = axios;
 
 new Vue({
   router,

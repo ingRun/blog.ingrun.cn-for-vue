@@ -60,6 +60,11 @@ export default {
           });
           this.$router.push('/show')
         }
+      }).catch( e => {
+          this.$notify.error({
+            title: e.response.status,
+            message: e.response.data.message 
+          });
       });
 
     },

@@ -4,7 +4,7 @@
       <el-col :span="24">
         <div class="title">
           <el-input placeholder="文章标题" v-model="title" clearable></el-input>
-          <p> 注意，正文暂时不支持上传图片功能！</p>
+          <p>注意，正文暂时不支持上传图片功能！</p>
         </div>
       </el-col>
       <el-col :span="24">
@@ -41,16 +41,27 @@ export default {
         method: "post",
         type: "json",
         headers: {
-          "Content-Type": "application/json; charset=utf-8" //这里重点
+          "Content-Type": "application/json; charset=utf-8", //这里重点
+          Authorization: "Bearer " + this.$store.state.token
         },
         data: JSON.stringify(blog)
-      }).then(res => {
-        if (res != "") {
-          this.$notify({
-            message: "添加博客成功！"
+      })
+        .then(res => {
+          if (res != "") {
+            this.$notify({
+              title: res.status + "",
+              message: "添加博客成功！",
+              duration: 2000,   //2秒自动消失
+              type: 'success'
+            });
+          }
+        })
+        .catch(e => {
+          this.$notify.error({
+            title: ' ' + e.response.status,
+            message: e.response.data.message + ''
           });
-        }
-      });
+        });
     }
   }
 };
@@ -73,6 +84,5 @@ export default {
     color: rgb(155, 154, 154);
     font-size: 14px;
   }
-
 }
 </style>

@@ -47,6 +47,7 @@ export default {
 
 .foot {
   background-color: rgb(251, 251, 251);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   min-height: 55px;
   border-radius: 12px;
   padding: 12px;
@@ -64,8 +65,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  /* font-family: "simsun"; */
   color: #2c3e50;
-  background-color: rgb(197, 193, 193);
+  background-color: rgb(241, 235, 235);
 
   padding-left: 2%;
   padding-right: 2%;
