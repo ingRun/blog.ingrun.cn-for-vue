@@ -1,30 +1,32 @@
 <template>
   <div id="title">
     <div class="con">
-      <el-row>
-        <el-col :span="12">
-          <h2>ingrun</h2>
-          <h3>个人博客</h3>
-        </el-col>
-        <el-col :offset="8" :span="4">
-          <!-- <el-button @click="home">home</el-button>
-          <el-divider direction="vertical"></el-divider>
-          <el-button @click="addBlog">add</el-button>-->
-          <div class="span">
-            <el-link target="_blank" @click="home">Home</el-link>
-            <el-divider direction="vertical"></el-divider>
-            <el-link @click="showBlog">Show</el-link>
-            <el-divider direction="vertical"></el-divider>
-            <el-link @click="addBlog">AddBlog</el-link>
+      <el-menu
+        :default-active="$route.path"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        router
+      >
+        <el-menu-item index="/">
+          <!-- <span class="home">主页</span> -->
+          <div class="icon">
+            <el-avatar :size="50" src="https://empty" @error="errorHandler">
+              <img src="../assets/ingrun.png" />
+            </el-avatar>
           </div>
-        </el-col>
-      </el-row>
+        </el-menu-item>
+        <el-menu-item index="/tag" disabled>标签</el-menu-item>
+        <el-menu-item index="/show">展示</el-menu-item>
+        <el-menu-item index="/addBlog">添加</el-menu-item>
+      </el-menu>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  
   methods: {
     home() {
       this.$router.push("/");
@@ -41,13 +43,18 @@ export default {
 
 <style lang='scss' scoped>
 .con {
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  height: 150px;
-  width: 100%;
   margin: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  background-color: rgb(251, 251, 251);
+  background-color: rgba(207, 204, 204, 0.2);
+  .el-menu {
+    padding-left: 5%;
+    // position: fixed;
+    // width: 100%;
+    // background-color: white;
+    .home {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
 }
 
 .span {
@@ -56,4 +63,20 @@ export default {
     font-weight: bold;
   }
 }
+
+.icon {
+  // padding: 15px;
+  height: 80%;
+}
+
+// .con::after {
+//   content: "";
+//   width: 150%;
+//   height: 4.375rem;
+//   background-color: #fff;
+//   left: -25%;
+//   bottom: 260px;
+//   border-radius: 100%;
+//   position: absolute;
+// }
 </style>

@@ -2,12 +2,21 @@
   <div class="show">
     <el-row v-if="blog_id">
       <el-col :span="24">
-        <h2>{{blog.blog_title}}</h2>
+        <div class="showTitle">
+          <h2>{{blog.blog_title}}</h2>
+          <p class="info">
+            <span>最后修改：<span> {{blog.update_time}} </span></span>
+            <el-divider direction="vertical"></el-divider>
+            <span>作者： <span> {{author}} </span></span>
+            <el-divider direction="vertical"></el-divider>
+            <span>阅读：<span> {{blog.read_count}} </span></span>
+          </p>
+        </div>
         <div class="icon">
           <el-row>
             <el-col :span="1" :offset="20">
               <el-link @click="toUpdBlog()">
-                <i class="el-icon-edit"> 编辑</i>
+                <i class="el-icon-edit">编辑</i>
               </el-link>
             </el-col>
             <el-col :span="1">
@@ -20,7 +29,9 @@
         </div>
       </el-col>
       <el-col :span="24">
-        <Content :contents="blog_contonts"></Content>
+        <div class="content">
+          <Content :contents="blog_contonts"></Content>
+        </div>
       </el-col>
     </el-row>
     <div v-else v-loading.fullscreen.lock="isloading"></div>
@@ -41,7 +52,8 @@ export default {
       blog: "",
       blog_contonts: "",
       blog_id: "",
-      isloading: false
+      isloading: false,
+      author: ''
     };
   },
   mounted() {
@@ -75,9 +87,22 @@ export default {
         method: "get"
       }).then(res => {
         this.blog = res.data.data;
+        this.getAuthor()
       });
     },
 
+    getAuthor(){
+      var url = 'api/getUserName/' + this.blog.author
+      this.$axios({
+        url: url,
+        method: "get",
+        type: "json",
+      }).then(res => {
+        if (res.data.code == 1) {
+          this.author = res.data.data
+        }
+      });
+    },
     toUpdBlog() {
       this.$router.push("/updBlog");
     }
@@ -93,6 +118,26 @@ export default {
   i {
     cursor: pointer;
   }
+}
+
+.showTitle {
+  // background-color: rgba(204, 206, 207, 0.2);
+  background-color: white;
+  padding: 55px 0 25px 0;
+  margin-bottom: 45px;
+  h2 {
+    margin: 0;
+  }
+  .info {
+    font-size: 13px;
+    color: rgb(144, 145, 146);
+    margin-top: 25px;
+  }
+}
+
+.content {
+  max-width: 900px;
+  margin: auto;
 }
 </style>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="addBlog">
+  <div class="updBlog">
     <el-row>
       <el-col :span="24">
         <div class="title">
@@ -42,7 +42,8 @@ export default {
         id: id,
         contents: this.blog_contents,
         blog_title: this.blog.blog_title,
-        blog_type: this.blog.blog_type
+        blog_type: this.blog.blog_type,
+        preview: this.blog.preview
       };
 
       this.$axios({
@@ -111,5 +112,10 @@ export default {
     color: rgb(155, 154, 154);
     font-size: 14px;
   }
+}
+
+.updBlog{
+  max-width: 90%;
+  margin: auto;
 }
 </style>

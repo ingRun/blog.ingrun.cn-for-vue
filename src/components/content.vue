@@ -10,6 +10,8 @@
             :editable="false"
             :toolbarsFlag="false"
             fontSize="12px"
+            previewBackground="#fff"
+            :boxShadow="false"
           ></mavon-editor>
         </el-col>
       </el-row>

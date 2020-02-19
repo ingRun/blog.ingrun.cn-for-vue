@@ -3,6 +3,8 @@
     <div id="nav">
       <ti></ti>
     </div>
+
+
     <div class="con">
       <router-view />
     </div>
@@ -16,6 +18,7 @@
         <el-link>注册用户申请</el-link>
       </p>
     </div>
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -34,14 +37,13 @@ export default {
 
 <style lang='scss' scoped>
 .con {
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 15px;
+  // border: 1px solid #ccc;
+  // border-radius: 12px;
   min-height: 450px;
-  margin-top: 22px;
+
   // padding-bottom: 42px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  background-color: rgb(251, 251, 251);
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  // background-color: rgb(251, 251, 251);
   // margin-bottom: 22px;
 }
 
@@ -67,16 +69,16 @@ export default {
   text-align: center;
   /* font-family: "simsun"; */
   color: #2c3e50;
-  background-color: rgb(241, 235, 235);
+  background-color: rgb(255, 255, 255);
 
-  padding-left: 2%;
-  padding-right: 2%;
+  /* padding-left: 2%;
+  padding-right: 2%; */
   padding-bottom: 2%;
 }
 
-#nav {
-  padding-top: 22px;
-}
+/* #nav { */
+/* padding-top: 22px; */
+/* } */
 
 /* #nav a {
   font-weight: bold;
