@@ -10,7 +10,7 @@
       <el-col :span="24">
         <mavon-editor v-model="contents" defaultOpen="preview" fontSize="16px"></mavon-editor>
       </el-col>
-      <el-col span="24">
+      <el-col :span="24">
         <div style="margin-top: 30px;">
           <el-input placeholder="预览内容" v-model="preview" type="textarea" class="input-with-select"></el-input>
 

@@ -5,20 +5,19 @@
         :default-active="$route.path"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         router
       >
         <el-menu-item index="/">
           <!-- <span class="home">主页</span> -->
           <div class="icon">
-            <el-avatar :size="50" src="https://empty" @error="errorHandler">
+            <el-avatar :size="50" >
               <img src="../assets/ingrun.png" />
             </el-avatar>
           </div>
         </el-menu-item>
         <el-menu-item index="/tag" disabled>标签</el-menu-item>
         <el-menu-item index="/show">展示</el-menu-item>
-        <el-menu-item index="/addBlog">添加</el-menu-item>
+        <!-- <el-menu-item index="/addBlog" disabled>添加</el-menu-item> -->
       </el-menu>
     </div>
   </div>

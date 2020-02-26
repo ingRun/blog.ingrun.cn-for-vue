@@ -9,7 +9,7 @@
       <router-view />
     </div>
 
-    <drawer />
+    <!-- <drawer /> -->
     <div class="foot">
       <p>
         <el-link>关于博主</el-link>
@@ -25,12 +25,12 @@
 <script>
 // @ is an alias to /src
 import ti from "@/components/title.vue";
-import drawer from "@/components/drawer.vue";
+// import drawer from "@/components/drawer.vue";
 
 export default {
   components: {
     ti,
-    drawer
+    // drawer
   }
 };
 </script>
@@ -73,7 +73,7 @@ export default {
 
   /* padding-left: 2%;
   padding-right: 2%; */
-  padding-bottom: 2%;
+  /* padding-bottom: 2%; */
 }
 
 /* #nav { */
