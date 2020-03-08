@@ -5,14 +5,23 @@
         <div class="showTitle">
           <h2>{{blog.blog_title}}</h2>
           <p class="info">
-            <span>最后修改：<span> {{blog.update_time}} </span></span>
+            <span>
+              最后修改：
+              <span>{{blog.update_time}}</span>
+            </span>
             <el-divider direction="vertical"></el-divider>
-            <span>作者： <span> {{author}} </span></span>
+            <span>
+              作者：
+              <span>{{author}}</span>
+            </span>
             <el-divider direction="vertical"></el-divider>
-            <span>阅读：<span> {{blog.read_count}} </span></span>
+            <span>
+              阅读：
+              <span>{{blog.read_count}}</span>
+            </span>
           </p>
         </div>
-        <div class="icon">
+        <!-- <div class="icon">
           <el-row>
             <el-col :span="1" :offset="20">
               <el-link @click="toUpdBlog()">
@@ -26,10 +35,23 @@
               <i class="el-icon-delete">删除</i>
             </el-col>
           </el-row>
-        </div>
+        </div>-->
       </el-col>
       <el-col :span="24">
         <div class="content">
+          <div class="blog_type">
+            <el-row :gutter="10">
+              <div v-for="(item, index) in blog.blog_type" :key="index">
+                <el-col :span="2">
+                  <el-tag type="warning" >{{ item }}</el-tag>
+                </el-col>
+              </div>
+            </el-row>
+            <!-- <el-tag type="success">标签二</el-tag>
+            <el-tag type="info">标签三</el-tag>
+            <el-tag type="warning">标签四</el-tag>
+            <el-tag type="danger">标签五</el-tag>-->
+          </div>
           <Content :contents="blog_contonts"></Content>
         </div>
       </el-col>
@@ -53,7 +75,7 @@ export default {
       blog_contonts: "",
       blog_id: "",
       isloading: false,
-      author: ''
+      author: ""
     };
   },
   mounted() {
@@ -87,19 +109,19 @@ export default {
         method: "get"
       }).then(res => {
         this.blog = res.data.data;
-        this.getAuthor()
+        this.getAuthor();
       });
     },
 
-    getAuthor(){
-      var url = 'api/getUserName/' + this.blog.author
+    getAuthor() {
+      var url = "api/getUserName/" + this.blog.author;
       this.$axios({
         url: url,
         method: "get",
-        type: "json",
+        type: "json"
       }).then(res => {
         if (res.data.code == 1) {
-          this.author = res.data.data
+          this.author = res.data.data;
         }
       });
     },
@@ -138,6 +160,10 @@ export default {
 .content {
   max-width: 900px;
   margin: auto;
+}
+
+.blog_type {
+  text-align: left;
 }
 </style>
 

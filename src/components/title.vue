@@ -1,23 +1,30 @@
 <template>
   <div id="title">
     <div class="con">
-      <el-menu
-        :default-active="$route.path"
-        class="el-menu-demo"
-        mode="horizontal"
-        router
-      >
+      <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" router>
         <el-menu-item index="/">
           <!-- <span class="home">主页</span> -->
           <div class="icon">
-            <el-avatar :size="50" >
+            <el-avatar :size="50">
               <img src="../assets/ingrun.png" />
             </el-avatar>
           </div>
         </el-menu-item>
         <el-menu-item index="/tag" disabled>标签</el-menu-item>
         <el-menu-item index="/show">展示</el-menu-item>
-        <!-- <el-menu-item index="/addBlog" disabled>添加</el-menu-item> -->
+        <el-menu-item>
+          <template slot="title">
+            <i class="el-icon-search" @click="search" v-if="is_show"></i>
+            <el-input
+              placeholder="请输入内容"
+              prefix-icon="el-icon-search"
+              v-model="search_value"
+              @keyup.enter.native="search()"
+              v-else
+            ></el-input>
+            <!-- <el-button icon="el-icon-search"></el-button> -->
+          </template>
+        </el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -25,7 +32,12 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      is_show: true,
+      search_value: ""
+    };
+  },
   methods: {
     home() {
       this.$router.push("/");
@@ -35,6 +47,18 @@ export default {
     },
     showBlog() {
       this.$router.push("/show");
+    },
+    search() {
+      if (this.is_show) {
+        this.is_show = false;
+      } else {
+        if (this.search_value) {
+          this.$notify({
+            message: "search:" + this.search_value
+          });
+        }
+        this.is_show = true;
+      }
     }
   }
 };
@@ -68,6 +92,11 @@ export default {
   height: 80%;
 }
 
+.title {
+  button {
+    border: none;
+  }
+}
 // .con::after {
 //   content: "";
 //   width: 150%;
