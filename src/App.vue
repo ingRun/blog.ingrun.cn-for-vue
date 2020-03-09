@@ -15,7 +15,7 @@
         <el-link>关于博主</el-link>
       </p>
       <p>
-        <el-link>注册用户申请</el-link>
+        <el-link type="primary" href="http://www.beian.miit.gov.cn/" target="_blank">皖ICP备20003074号</el-link>
       </p>
     </div>
     <el-backtop></el-backtop>
