@@ -56,7 +56,6 @@
         </div>
       </el-col>
     </el-row>
-    <div v-else v-loading.fullscreen.lock="isloading"></div>
   </div>
 </template>
 
@@ -74,7 +73,7 @@ export default {
       blog: "",
       blog_contonts: "",
       blog_id: "",
-      isloading: false,
+      isloading: '',
       author: ""
     };
   },
@@ -84,21 +83,31 @@ export default {
     }
 
     if (this.blog_id != "") {
-      this.isloading = true;
       this.getBlogcontents(this.blog_id);
       this.getBlog(this.blog_id);
     }
   },
   methods: {
+    openLoading() {
+        this.isloading = this.$loading({
+          lock: true,
+          text: 'Loading',
+        });
+        // setTimeout(() => {
+        //   loading.close();
+        // }, 2000);
+      
+    },
     getBlogcontents(id) {
       var url = "api/getBlogContents/" + id;
+      this.openLoading();
       this.$axios({
         url: url,
         method: "get"
       }).then(res => {
-        this.isloading = false;
         if (res.data.code == 1) {
           this.blog_contonts = res.data.data;
+          this.isloading.close();
         }
       });
     },

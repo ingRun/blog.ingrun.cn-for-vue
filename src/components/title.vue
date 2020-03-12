@@ -53,9 +53,10 @@ export default {
         this.is_show = false;
       } else {
         if (this.search_value) {
-          this.$notify({
-            message: "search:" + this.search_value
-          });
+          this.$router.push({path:"/search",query:{search_value:this.search_value}})
+          // this.$notify({
+          //   message: "search:" + this.search_value
+          // });
         }
         this.is_show = true;
       }
