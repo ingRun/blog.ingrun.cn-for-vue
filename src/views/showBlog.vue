@@ -21,36 +21,15 @@
             </span>
           </p>
         </div>
-        <!-- <div class="icon">
-          <el-row>
-            <el-col :span="1" :offset="20">
-              <el-link @click="toUpdBlog()">
-                <i class="el-icon-edit">编辑</i>
-              </el-link>
-            </el-col>
-            <el-col :span="1">
-              <i class="el-icon-share">分享</i>
-            </el-col>
-            <el-col :span="1">
-              <i class="el-icon-delete">删除</i>
-            </el-col>
-          </el-row>
-        </div>-->
       </el-col>
       <el-col :span="24">
         <div class="content">
           <div class="blog_type">
             <el-row :gutter="10">
-              <div v-for="(item, index) in blog.blog_type" :key="index">
-                <el-col :span="2">
-                  <el-tag type="warning" >{{ item }}</el-tag>
-                </el-col>
+              <div v-for="(item, index) in blog.blog_type" :key="index" class="blog_type">
+                <el-tag >{{ item }}</el-tag>
               </div>
             </el-row>
-            <!-- <el-tag type="success">标签二</el-tag>
-            <el-tag type="info">标签三</el-tag>
-            <el-tag type="warning">标签四</el-tag>
-            <el-tag type="danger">标签五</el-tag>-->
           </div>
           <Content :contents="blog_contonts"></Content>
         </div>
@@ -173,6 +152,9 @@ export default {
 
 .blog_type {
   text-align: left;
+  float: left;
+  margin-right: 12px;
+  margin-bottom: 10px;
 }
 </style>
 

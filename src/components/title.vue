@@ -54,9 +54,7 @@ export default {
       } else {
         if (this.search_value) {
           this.$router.push({path:"/search",query:{search_value:this.search_value}})
-          // this.$notify({
-          //   message: "search:" + this.search_value
-          // });
+          this.$router.go(0);  // 强制刷新页面 防止在搜索页面进行搜索不会自动刷新
         }
         this.is_show = true;
       }

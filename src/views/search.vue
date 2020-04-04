@@ -1,9 +1,12 @@
 <template>
   <div class="search">
-    <div v-if="! search_value_list" class="loading">
+    <div v-if="search_value_list == []" class="loading">
       <i class="el-icon-loading"></i>
     </div>
-    <el-row>
+    <div v-if="search_value_list == ''">
+      <p> 未搜索到相关信息 </p>
+    </div>
+    <el-row >
       <el-col :span="22" :offset="1">
         <div class="_blog" v-for="(item, index) in search_value_list" :key="index">
           <el-row>
